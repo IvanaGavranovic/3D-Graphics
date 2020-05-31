@@ -1,1 +1,7 @@
 # 3D-Graphics
+
+Cilj trećeg predmetnog zadatka je postavljanje elemenata elektroenergetske mreže na 3D mapu. Mapu je potrebno postaviti kao 2D sliku – ploča na dnu scene (slika je data u sklopu fajlova potrebnih za projekat).  
+Objekti će se postavljajti na odgovarajuće koordinate na mapi. Donji levi ugao mape ima koordinate lat: 45,2325, lon: 19.793909, a gornji desni lat: 45,277031, lon: 19.894459. Sve čvorove van ove površine ignorisati. Potrebno je naspram širine i visine ploče sa slikom mape izračunati koliki je relativni pomeraj jednog stepena u 3D sceni. Postaviti čvorove i vodove na svoje pozicije.  
+Kod trafostanica/čvorova/prekidača koji se preklapaju, crtati ih jednog iznad drugog. 
+Potrebno je da se uz pritisak na levi taster miša, mapa može pomerati (pan-ovati) i zumirati pomoću scroll točkića. Nezavisno od nivoa zumiranja, objekti treba uvek da stoje na svojim koordinatama. Treba omogućiti da se scena slobodno rotira oko svog centra prilikom pomeranja miša dok je pritisnut scroll točkić.  
+Objekti dodati na mapu trebaju da imaju obezbedjen hit testing tako da se mogu ispisati informacije o objektu (id, ime, tip) u vidu tooltipa ili na sličan način, u blizini kursora. Takođe hit testing treba da funkcioniše i na linijama, tako što će “klikom” na liniju promeniti boju entiteta koje spaja. Zoom i pomeranje objekata se mora obaviti van geografskih koordinata - sve je x,y,z prostor. Vodove obavezno crtati pomoću trouglova.
