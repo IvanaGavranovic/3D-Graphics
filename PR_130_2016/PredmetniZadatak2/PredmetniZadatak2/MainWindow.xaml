@@ -5,35 +5,89 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PredmetniZadatak2"
         mc:Ignorable="d"
-        Title="Electrical distribution network" WindowState="Maximized" Name="mainWindow">
+        Title="MainWindow" Height="800" Width="1100">
 
-    <Grid>
-        <DockPanel Background="Black">
-            <Slider x:Name="slider" Minimum=".1" Maximum="10" Value="1" DockPanel.Dock="Top"/>
-            <ScrollViewer Name="scrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <Border Name="frame" BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Canvas Name="myCanvas" Width="1100" Height="700">
-                        <Canvas.LayoutTransform>
-                            <ScaleTransform ScaleX="{Binding ElementName=slider, Path=Value}"
-                                            ScaleY="{Binding ElementName=slider, Path=Value}"/>
-                        </Canvas.LayoutTransform>
+    <Grid Background="DarkGray">
+        <ScrollViewer  Name="scrollViewer" HorizontalScrollBarVisibility="Hidden"  VerticalScrollBarVisibility="Hidden">
+            <Viewport3D Name="mainViewport" ClipToBounds="True" Height="700" Width="1000">
+
+                <!--- Definisanje kamere -->
+                <Viewport3D.Camera>
+                    <PerspectiveCamera  x:Name = "camera" Position = "5 -5 8" LookDirection = "0 8 -8"
+                                    FieldOfView = "57" UpDirection = "0,1,0"/>
+                </Viewport3D.Camera>
+
+                <ModelVisual3D x:Name="MyModel">
+                    <ModelVisual3D.Transform>
+                        <Transform3DGroup>
+                            <Transform3DGroup.Children>
+                                <Transform3DCollection>
+
+                                    <ScaleTransform3D ScaleX="1" ScaleY="1" ScaleZ="1" />
+                                    <RotateTransform3D CenterX="5" CenterY="3.5" CenterZ="0">
+                                        <RotateTransform3D.Rotation>
+                                            <AxisAngleRotation3D   Angle="0" />
+                                        </RotateTransform3D.Rotation>
+                                    </RotateTransform3D>
+                                    <TranslateTransform3D OffsetX="0" OffsetY="0" OffsetZ="0" />
+
+                                </Transform3DCollection>
+                            </Transform3DGroup.Children>
+
+                        </Transform3DGroup>
+                    </ModelVisual3D.Transform>
+
+                    <ModelVisual3D.Content>
+                        <Model3DGroup>
+                            <Model3DGroup.Children>
+                                <!-- Definisanje svetla -->
+                                <AmbientLight/>
 
 
-                        <Label Foreground="White" Canvas.Left="5">Legend</Label>
+                                <!--- Definisanje 3D objekta i materijala -->
+                                <GeometryModel3D x:Name="geometryModel">
+                                    <GeometryModel3D.Geometry>
+                                        <MeshGeometry3D x:Name = "meshMain"
+                                        Positions = "0,0,0 10,0,0 10,7,0 0,7,0"  
+                                        TriangleIndices = "0,1,2 0,2,3"
+                                        TextureCoordinates="0,1 1,1 1,0 0,0">
+                                        </MeshGeometry3D>
+                                    </GeometryModel3D.Geometry>
 
-                        <Ellipse Width="20" Height="20" Canvas.Left="10" Canvas.Top="31" Fill="LightGreen" />
-                        <Label Foreground="White" Canvas.Left="39" Canvas.Top="28" FontSize="10">Substations</Label>
+                                    <GeometryModel3D.Material>
+                                        <DiffuseMaterial>
+                                            <DiffuseMaterial.Brush>
+                                                <ImageBrush ImageSource="Image\PZ3 - map.jpg"/>
+                                            </DiffuseMaterial.Brush>
+                                        </DiffuseMaterial>
+                                    </GeometryModel3D.Material>
 
-                        <Ellipse Width="20" Height="20" Canvas.Left="10" Canvas.Top="56" Fill="Orange" />
-                        <Label Foreground="White" Canvas.Left="39" Canvas.Top="54" FontSize="10">Node</Label>
+                                </GeometryModel3D>
 
-                        <Ellipse Width="20" Height="20" Canvas.Left="10" Canvas.Top="81" Fill="LightSkyBlue" />
-                        <Label Foreground="White" Canvas.Left="39" Canvas.Top="81" FontSize="10">Switch</Label>
+                                <GeometryModel3D>
+                                    <GeometryModel3D.Geometry>
+                                        <MeshGeometry3D x:Name = "meshBack"
+                                        Positions = "0,0,-0.03 10,0,-0.03 10,7,0 0,7,-0.03"  
+                                        TriangleIndices = "1,0,3 3,2,1">
+                                        </MeshGeometry3D>
+                                    </GeometryModel3D.Geometry>
 
-                        <Image Name="mainScreen"></Image>
-                    </Canvas>
-                </Border>
-            </ScrollViewer>
-        </DockPanel>
+                                    <GeometryModel3D.Material>
+                                        <DiffuseMaterial>
+                                            <DiffuseMaterial.Brush>
+                                                <SolidColorBrush Color="Black"/>
+                                            </DiffuseMaterial.Brush>
+                                        </DiffuseMaterial>
+                                    </GeometryModel3D.Material>
+                                </GeometryModel3D>
+
+                            </Model3DGroup.Children>
+                        </Model3DGroup>
+
+                    </ModelVisual3D.Content>
+                </ModelVisual3D>
+            </Viewport3D>
+
+        </ScrollViewer>
     </Grid>
 </Window>

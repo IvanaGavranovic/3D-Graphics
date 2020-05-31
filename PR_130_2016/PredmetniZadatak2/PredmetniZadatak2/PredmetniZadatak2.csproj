@@ -68,6 +68,7 @@
     <Compile Include="Classes\NodeEntity.cs" />
     <Compile Include="Classes\NetworkModel.cs" />
     <Compile Include="Classes\Point.cs" />
+    <Compile Include="Classes\PointStack.cs" />
     <Compile Include="Classes\SubstationEntity.cs" />
     <Compile Include="Classes\SwitchEntity.cs" />
     <Compile Include="Handlers\CoordinatesHandler.cs" />
@@ -104,6 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\PZ3 - map.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
