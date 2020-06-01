@@ -8,63 +8,99 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 
 namespace PredmetniZadatak2.Handlers
 {
     public class ScreenHandler
     {
-        public static List<Image> images = new List<Image>();
-        public static double MinI = 672;
-        public static double MinJ = 726;
-        public static double MaxI = 811;
-        public static double MaxJ = 951;
-        
-        public static Ellipse DrawSubstationImage(int indexI, int indexJ, Canvas myCanvas, SubstationEntity station)
+        public static GeometryModel3D Make3DCube(double x, double y, double z, double edge, EntityType type)
         {
-            Ellipse element = new Ellipse() { Width = 3, Height = 3, Fill = Brushes.LightGreen };
-            element.ToolTip = $"ID: {station.Id}\nSubstation Entity\nName: {station.Name}";
-            Canvas.SetLeft(element, ((double)indexJ - MinJ) / (MaxJ - MinJ) * myCanvas.Width);
-            Canvas.SetTop(element, ((double)indexI - MinI) / (MaxI - MinI) * myCanvas.Height);
+            double temp = x;
+            x = y;
+            y = temp;
 
-            return element;
-        }
+            // meshGeometry za kocku
+            MeshGeometry3D cube = new MeshGeometry3D();
 
-        public static Ellipse DrawNodeImage(int indexI, int indexJ, Canvas myCanvas, NodeEntity node)
-        {
-            Ellipse element = new Ellipse() { Width = 3, Height = 3, Fill = Brushes.Orange };
-            element.ToolTip = $"ID: {node.Id}\nNode Entity\nName: {node.Name}";
-            Canvas.SetLeft(element, ((double)indexJ - MinJ) / (MaxJ - MinJ) * myCanvas.Width);
-            Canvas.SetTop(element, ((double)indexI - MinI) / (MaxI - MinI) * myCanvas.Height);
-
-            return element;
-        }
-
-        public static Ellipse DrawSwitchImage(int indexI, int indexJ, Canvas myCanvas, SwitchEntity switchEntity)
-        {
-            Ellipse element = new Ellipse() { Width = 3, Height = 3, Fill = Brushes.LightSkyBlue };
-            element.ToolTip = $"ID: {switchEntity.Id}\nSwitch Entity\nName: {switchEntity.Name}\nStatus: {switchEntity.Status}";
-            Canvas.SetLeft(element, ((double)indexJ - MinJ) / (MaxJ - MinJ) * myCanvas.Width);
-            Canvas.SetTop(element, ((double)indexI - MinI) / (MaxI - MinI) * myCanvas.Height);
-
-            return element;
-        }
-
-        public static Line DrawLine(double x1, double y1, double x2, double y2, Canvas myCanvas, LineEntity lineEntity)
-        {
-            Line line = new Line()
+            // ivice kocke
+            cube.Positions = new Point3DCollection
             {
-                X1 = x1,
-                X2 = x2,
-                Y1 = y1,
-                Y2 = y2,
-                StrokeThickness = 0.5,
-                Stroke = Brushes.White
+                new Point3D(x, y, z), new Point3D(x + edge, y, z), new Point3D(x, y + edge, z), new Point3D(x + edge, y + edge, z),
+                new Point3D(x, y, edge + z), new Point3D(x + edge, y, edge + z), new Point3D(x, y + edge, edge + z), new Point3D(x + edge, y + edge, edge + z)
             };
 
-            line.ToolTip = $"ID: {lineEntity.Id}\nLine Entity\nName:{lineEntity.Name}";
-           
-            return line;
-        }     
+            // trouglovi
+            List<int> listTriangles = new List<int>() { 2, 3, 1,  2, 1, 0,  7, 1, 3,  7, 5, 1,  6, 5, 7,  6, 4, 5,
+                                                        6, 2, 4, 2, 0, 4,  2, 7, 3,  2, 6, 7,  0, 1, 5,  0, 5, 4};
+            Int32Collection triangles = new Int32Collection(listTriangles);
+            cube.TriangleIndices = triangles;
+
+            // definisanje modela kocke
+            GeometryModel3D cubeModel = new GeometryModel3D();
+            cubeModel.Geometry = cube;
+
+            // odabir boje u zavisnosti od tipa
+            switch (type)
+            {
+                case EntityType.Substation:
+                    cubeModel.Material = new DiffuseMaterial(Brushes.Red);
+                    break;
+
+                case EntityType.Node:
+                    cubeModel.Material = new DiffuseMaterial(Brushes.Blue);
+                    break;
+
+                case EntityType.Switch:
+                    cubeModel.Material = new DiffuseMaterial(Brushes.ForestGreen);
+                    break;
+            }
+
+            return cubeModel;
+        }
+
+        public static void Draw3DCube(GeometryModel3D cubeModel, ModelVisual3D myModel)
+        {
+            // 3D model
+            ModelVisual3D model = new ModelVisual3D();
+            model.Content = cubeModel;
+
+            myModel.Children.Add(model);
+        }
+
+        public static void DrawLine(double x1, double y1, double x2, double y2, ModelVisual3D myModel)
+        {
+            double temp1 = x1, temp2 = x2;
+            x1 = y1;
+            x2 = y2;
+            y1 = temp1;
+            y2 = temp2;
+
+            // meshGeometry
+            MeshGeometry3D line = new MeshGeometry3D();
+
+            // ivice
+            line.Positions = new Point3DCollection
+            {
+               new Point3D(x1, y1, 0.01), new Point3D(x2, y2, 0.01), new Point3D(x2 - 0.005, y2 - 0.005, 0.01), new Point3D(x1 - 0.005, y1 - 0.005, 0.01)
+            };
+
+            // trouglovi
+            List<int> listTriangles = new List<int>() { 0, 1, 2, 0, 2, 3 };
+            Int32Collection triangles = new Int32Collection(listTriangles);
+            line.TriangleIndices = triangles;
+
+            // definisanje modela
+            GeometryModel3D lineModel = new GeometryModel3D();
+            lineModel.Geometry = line;
+            lineModel.Material = new DiffuseMaterial(Brushes.Black);
+
+            // 3D model
+            ModelVisual3D model = new ModelVisual3D();
+            model.Content = lineModel;
+
+            myModel.Children.Add(model);
+        }
     }
 }

@@ -29,9 +29,9 @@ namespace PredmetniZadatak2
             InitializeComponent();
 
             NetworkModel networkModel = new NetworkModel();
-           // networkModel = MapHandler.LoadModelToMap(networkModel, MyModel);
+            networkModel = MapHandler.LoadModelToMap(networkModel, MyModel);
 
-           // Transformation transformation = new Transformation(this, scrollViewer, mainViewport);
+            Transformation transformation = new Transformation(this, scrollViewer, mainViewport);
 
         }
 
