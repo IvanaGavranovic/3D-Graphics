@@ -16,7 +16,7 @@ namespace PredmetniZadatak2.Classes
 
         public override string ToString()
         {
-            return String.Format($"Node {Name}\nx={Math.Round(X, 2)},y={Math.Round(Y, 2)}");
+            return String.Format($"Id: {Id}\nType: NodeEntity\nName: {Name}");
         }
 
         //public override void SetDefaultColor()

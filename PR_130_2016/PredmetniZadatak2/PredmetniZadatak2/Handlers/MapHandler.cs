@@ -74,9 +74,9 @@ namespace PredmetniZadatak2.Handlers
                         Points.Add(new PointStack(mapX, mapY, 0));
                     }
                     GeometryModel3D model3D = ScreenHandler.Make3DCube(mapX, mapY, z, 0.05, EntityType.Substation);
-                  //  Transformation.models.Add(model3D);
+                    Transformation.models.Add(model3D);
 
-                  //  Entities.Add(Transformation.models.Count - 1, networkModel.Substations[i]); /// ???
+                    Entities.Add(Transformation.models.Count - 1, networkModel.Substations[i]);
 
                     ScreenHandler.Draw3DCube(model3D, myModel);
                 }
@@ -121,9 +121,9 @@ namespace PredmetniZadatak2.Handlers
                     }
 
                     GeometryModel3D model3D = ScreenHandler.Make3DCube(mapX, mapY, z, 0.05, EntityType.Node);
-                  //  Transformation.models.Add(model3D);
+                    Transformation.models.Add(model3D);
 
-                  //  Entities.Add(Transformation.models.Count - 1, networkModel.Nodes[i]);
+                    Entities.Add(Transformation.models.Count - 1, networkModel.Nodes[i]);
 
                     ScreenHandler.Draw3DCube(model3D, myModel);
                 }
@@ -168,9 +168,9 @@ namespace PredmetniZadatak2.Handlers
                     }
 
                     GeometryModel3D model3D = ScreenHandler.Make3DCube(mapX, mapY, z, 0.05, EntityType.Switch);
-                   // Transformation.models.Add(model3D);
+                    Transformation.models.Add(model3D);
 
-                   // Entities.Add(Transformation.models.Count - 1, networkModel.Switches[i]);
+                    Entities.Add(Transformation.models.Count - 1, networkModel.Switches[i]);
 
                     ScreenHandler.Draw3DCube(model3D, myModel);
                 }

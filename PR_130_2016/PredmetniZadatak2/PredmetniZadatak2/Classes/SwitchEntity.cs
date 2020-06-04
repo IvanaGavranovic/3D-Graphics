@@ -21,7 +21,7 @@ namespace PredmetniZadatak2.Classes
 
         public override string ToString()
         {
-            return String.Format($"Switch {Name} -> Status: {Status}\nx={Math.Round(X, 2)},y={Math.Round(Y, 2)}");
+            return String.Format($"Id: {Id}\nType: SwitchEntity\nName: {Name}\nStatus: {Status}");
         }
 
         //public override void SetDefaultColor()

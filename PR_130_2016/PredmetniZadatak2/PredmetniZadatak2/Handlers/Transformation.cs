@@ -54,6 +54,8 @@ namespace PredmetniZadatak2.Handlers
             viewport.MouseMove += MouseMove;
             viewport.MouseDown += MiddleButtonDown;
             viewport.MouseUp += MiddleButtonUp;
+
+            window.MouseDown += MiddleButtonDownHandler;
         }
 
         #region Zoom
@@ -170,72 +172,57 @@ namespace PredmetniZadatak2.Handlers
         #endregion
 
 
-        //#region HIT TESTING
+        #region HIT TESTING
 
-        //// lista modela
-        //public static ArrayList models = new ArrayList();
-        //private GeometryModel3D hitgeo;
+        // lista modela
+        public static ArrayList models = new ArrayList();
+        private GeometryModel3D hitgeo;
 
-        //private void MiddleButtonDownHandler(object sender, MouseEventArgs e)
-        //{
-        //    if (e.MiddleButton.Equals(MouseButtonState.Pressed))
-        //    {
-        //        System.Windows.Point mouseposition = e.GetPosition(viewport);
-        //        Point3D testpoint3D = new Point3D(mouseposition.X, mouseposition.Y, 0);
-        //        Vector3D testdirection = new Vector3D(mouseposition.X, mouseposition.Y, 10);
+        private void MiddleButtonDownHandler(object sender, MouseEventArgs e)
+        {
+            if (e.MiddleButton.Equals(MouseButtonState.Pressed))
+            {
+                System.Windows.Point mouseposition = e.GetPosition(viewport);
+                Point3D testpoint3D = new Point3D(mouseposition.X, mouseposition.Y, 0);
+                Vector3D testdirection = new Vector3D(mouseposition.X, mouseposition.Y, 10);
 
-        //        PointHitTestParameters pointparams =
-        //                 new PointHitTestParameters(mouseposition);
-        //        RayHitTestParameters rayparams =
-        //                 new RayHitTestParameters(testpoint3D, testdirection);
+                PointHitTestParameters pointparams = new PointHitTestParameters(mouseposition);
+                RayHitTestParameters rayparams = new RayHitTestParameters(testpoint3D, testdirection);
 
-        //        //test for a result in the Viewport3D     
-        //        hitgeo = null;
-        //        VisualTreeHelper.HitTest(viewport, null, HTResult, pointparams);
-        //    }
-        //}
+                //test for a result in the Viewport3D     
+                hitgeo = null;
+                VisualTreeHelper.HitTest(viewport, null, HTResult, pointparams);
+            }
+        }
 
-        //private HitTestResultBehavior HTResult(System.Windows.Media.HitTestResult rawresult)
-        //{
+        private HitTestResultBehavior HTResult(System.Windows.Media.HitTestResult rawresult)
+        {
 
-        //    RayHitTestResult rayResult = rawresult as RayHitTestResult;
+            RayHitTestResult rayResult = rawresult as RayHitTestResult;
 
-        //    if (rayResult != null)
-        //    {
+            if (rayResult != null)
+            {
 
-        //        DiffuseMaterial darkSide =
-        //             new DiffuseMaterial(new SolidColorBrush(
-        //             System.Windows.Media.Colors.Red));
-        //        bool gasit = false;
-        //        for (int i = 0; i < models.Count; i++)
-        //        {
-        //            if ((GeometryModel3D)models[i] == rayResult.ModelHit)
-        //            {
-        //                hitgeo = (GeometryModel3D)rayResult.ModelHit;
-        //                gasit = true;
+                DiffuseMaterial darkSide = new DiffuseMaterial(new SolidColorBrush(System.Windows.Media.Colors.Red));
+                bool gasit = false;
+                for (int i = 0; i < models.Count; i++)
+                {
+                    if ((GeometryModel3D)models[i] == rayResult.ModelHit)
+                    {
+                        hitgeo = (GeometryModel3D)rayResult.ModelHit;
+                        gasit = true;
 
-        //                // tooltip za pritisnuti entitet
-        //                MessageBox.Show(MapHandler.Entities[i].ToString());
-        //            }
-        //        }
-        //        if (!gasit)
-        //        {
-        //            hitgeo = null;
-        //        }
-        //    }
-
-        //    return HitTestResultBehavior.Stop;
-        //}
-
-        ///*private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    for (int i = 0; i < models.Count; i++)
-        //    {
-        //        ((GeometryModel3D)models[i]).Material = blue;
-        //    }
-        //    MiddleButtonDownHandler(viewport, e);
-        //}*/
-
-        //#endregion
+                        // tooltip za pritisnuti entitet
+                        MessageBox.Show(MapHandler.Entities[i].ToString());
+                    }
+                }
+                if (!gasit)
+                {
+                    hitgeo = null;
+                }
+            }
+            return HitTestResultBehavior.Stop;
+        }
+        #endregion
     }
 }
