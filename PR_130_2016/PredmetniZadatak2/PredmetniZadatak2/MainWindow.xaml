@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PredmetniZadatak2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1100">
+        Title="MainWindow" Height="700" Width="1100" WindowStartupLocation="CenterScreen">
 
     <Grid Background="DarkGray">
         <ScrollViewer  Name="scrollViewer" HorizontalScrollBarVisibility="Hidden"  VerticalScrollBarVisibility="Hidden">
-            <Viewport3D Name="mainViewport" ClipToBounds="True" Height="700" Width="1000">
+            <Viewport3D Name="viewport" ClipToBounds="True" Height="600" Width="1000">
 
                 <!--- Definisanje kamere -->
                 <Viewport3D.Camera>
@@ -23,13 +23,19 @@
                             <Transform3DGroup.Children>
                                 <Transform3DCollection>
 
-                                    <ScaleTransform3D ScaleX="1" ScaleY="1" ScaleZ="1" />
+                                    <ScaleTransform3D x:Name="skaliranje" ScaleX="1" ScaleY="1" ScaleZ="1" />
                                     <RotateTransform3D CenterX="5" CenterY="3.5" CenterZ="0">
                                         <RotateTransform3D.Rotation>
-                                            <AxisAngleRotation3D   Angle="0" />
+                                            <AxisAngleRotation3D x:Name="rotateY" Axis="0,1,0" />
                                         </RotateTransform3D.Rotation>
                                     </RotateTransform3D>
-                                    <TranslateTransform3D OffsetX="0" OffsetY="0" OffsetZ="0" />
+                                    <RotateTransform3D CenterX="5" CenterY="3.5" CenterZ="0">
+                                        <RotateTransform3D.Rotation>
+                                            <AxisAngleRotation3D x:Name="rotateX" Axis="1,0,0" />
+                                        </RotateTransform3D.Rotation>
+                                    </RotateTransform3D>
+                                    
+                                    <TranslateTransform3D x:Name="translate" OffsetX="0" OffsetY="0" OffsetZ="0" />
 
                                 </Transform3DCollection>
                             </Transform3DGroup.Children>

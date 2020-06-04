@@ -50,23 +50,21 @@ namespace PredmetniZadatak2.Handlers
             var delt = Math.Atan(senoheps / (Math.Cos(nab)));
             var tao = Math.Atan(Math.Cos(delt) * Math.Tan(nab));
 
-            longitude = ((delt * (180.0 / Math.PI)) + s) + diflon;  //19.8481
-            latitude = ((lat + (1 + e2cuadrada * Math.Pow(Math.Cos(lat), 2) - (3.0 / 2.0) * e2cuadrada * Math.Sin(lat) * Math.Cos(lat) * (tao - lat)) * (tao - lat)) * (180.0 / Math.PI)) + diflat; // 45.2611
+            longitude = ((delt * (180.0 / Math.PI)) + s) + diflon;  //19.8911
+            latitude = ((lat + (1 + e2cuadrada * Math.Pow(Math.Cos(lat), 2) - (3.0 / 2.0) * e2cuadrada * Math.Sin(lat) * Math.Cos(lat) * (tao - lat)) * (tao - lat)) * (180.0 / Math.PI)) + diflat; // 45.23405
         }
 
         public static void FromCoordinatesToMapPosition(double latitude, double longitude, out double mapX, out double mapY)
         {
-            // ako su koordinate u granicama mape, onda ih treba preracunati u pozicije na mapi
             if (latitude >= MinX && latitude <= MaxX && longitude >= MinY && longitude <= MaxY)
             {
-                double x = latitude - MinX;
-                double y = longitude - MinY;
-                mapX = (6.95 * x / (MaxX - MinX));
-                mapY = (9.95 * y / (MaxY - MinY));
+                double x = latitude - MinX;  // 0.0015
+                double y = longitude - MinY; // 0.0972
+                mapX = (6.92 * x / (MaxX - MinX));     // 0.2432
+                mapY = (9.92 * y / (MaxY - MinY));     // 9.6192
             }
             else
             {
-                // indikatori da su koordinate van opsega mape
                 mapX = -1;
                 mapY = -1;
             }
