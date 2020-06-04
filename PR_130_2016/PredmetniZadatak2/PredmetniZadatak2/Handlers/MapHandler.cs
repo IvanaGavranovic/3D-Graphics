@@ -197,7 +197,7 @@ namespace PredmetniZadatak2.Handlers
 
                     CoordinatesHandler.FromCoordinatesToMapPosition(latitude2, longitude2, out mapX2, out mapY2);
 
-                    if (mapX1 != -1 && mapY1 != -1 && mapX2 != -1 && mapY2 != -1)
+                  if (mapX1 != -1 && mapY1 != -1 && mapX2 != -1 && mapY2 != -1)
                     {
                         cnt++;
                         ScreenHandler.DrawLine(mapX1, mapY1, mapX2, mapY2, myModel);

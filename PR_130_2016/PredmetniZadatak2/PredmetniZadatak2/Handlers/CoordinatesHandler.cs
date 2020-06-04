@@ -60,8 +60,8 @@ namespace PredmetniZadatak2.Handlers
             {
                 double x = latitude - MinX;  // 0.0015
                 double y = longitude - MinY; // 0.0972
-                mapX = (6.92 * x / (MaxX - MinX));     // 0.2432
-                mapY = (9.92 * y / (MaxY - MinY));     // 9.6192
+                mapX = (6.97 * x / (MaxX - MinX));     // 0.2432
+                mapY = (9.97 * y / (MaxY - MinY));     // 9.6192
             }
             else
             {
