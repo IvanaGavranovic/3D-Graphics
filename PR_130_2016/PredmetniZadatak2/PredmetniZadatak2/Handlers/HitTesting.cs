@@ -43,7 +43,9 @@ namespace PredmetniZadatak2.Handlers
                 RestoreColor();
                 var line = value as LineEntity;
                 var a = hitResult.ModelHit as GeometryModel3D;
+             
                 var first = model3DGroup.Children.FirstOrDefault(item => (item.GetValue(FrameworkElement.TagProperty) as Entity)?.Id == line.FirstEnd);
+                // var first = model3DGroup.Children.FirstOrDefault(item => (item.GetValue(FrameworkElement.TagProperty) as Entity)?.counter >3);
                 var second = model3DGroup.Children.FirstOrDefault(item => (item.GetValue(FrameworkElement.TagProperty) as Entity)?.Id == line.SecondEnd);
                 var first3D = (first as GeometryModel3D);
                 var second3D = (second as GeometryModel3D);
@@ -86,9 +88,9 @@ namespace PredmetniZadatak2.Handlers
         {
             toolTipForAll.StaysOpen = false;
             toolTipForAll.IsOpen = false;
-            toolTipForAll.Background = Brushes.Beige;
+            toolTipForAll.Background = Brushes.DarkGray;
             toolTipForAll.BorderBrush = Brushes.Black;
-            toolTipForAll.Foreground = Brushes.DarkSlateGray;
+            toolTipForAll.Foreground = Brushes.Black;
         }
         private void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

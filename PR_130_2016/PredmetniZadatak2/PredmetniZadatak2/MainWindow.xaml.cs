@@ -22,7 +22,7 @@ namespace PredmetniZadatak2
     public partial class MainWindow : Window
     {
         Transformation transformation;
-        HitTesting hitTestService;
+        HitTesting hitTest;
 
         public MainWindow()
         {
@@ -33,7 +33,7 @@ namespace PredmetniZadatak2
 
             transformation = new Transformation(viewport, skaliranje, this, translate, rotateX, rotateY);
 
-            hitTestService = new HitTesting(viewport, model3DGroup, this);
+            hitTest = new HitTesting(viewport, model3DGroup, this);
         }
 
     }

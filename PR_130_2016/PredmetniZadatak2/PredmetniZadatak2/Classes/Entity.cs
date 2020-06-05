@@ -29,22 +29,7 @@ namespace PredmetniZadatak2.Classes
 
         public double MapX { get => mapX; set => mapX = value; }
         public double MapY { get => mapY; set => mapY = value; }
-
+        public int counter { get; set; }
         public Entity() { }
-
-        //[XmlIgnore]
-        //public Ellipse Shape { get; set; }
-
-        //public Entity()
-        //{
-        //    Shape = null;
-        //}
-
-        //public void ClickFunction(object sender, EventArgs e)
-        //{
-        //    Shape.Fill = Brushes.Purple;
-        //}
-
-        //virtual public void SetDefaultColor(){}
     }
 }

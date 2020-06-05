@@ -18,10 +18,5 @@ namespace PredmetniZadatak2.Classes
         {
             return String.Format($"Id: {Id}\nType: SubstationEntity\nName: {Name}");
         }
-
-        //public override void SetDefaultColor()
-        //{
-        //    Shape.Fill = Brushes.LightGreen;
-        //}
     }
 }

@@ -15,7 +15,7 @@ namespace PredmetniZadatak2.Handlers
 {
     public class ScreenHandler
     {
-        public static GeometryModel3D Make3DCube(double x, double y, double z, double edge, EntityType type)
+        public static GeometryModel3D Make3DCube(double x, double y, double z, double edge, EntityType type, Entity entity)
         {
             double temp = x;
             x = y;
@@ -51,6 +51,8 @@ namespace PredmetniZadatak2.Handlers
                     cubeModel.Material = new DiffuseMaterial(Brushes.ForestGreen);
                     break;
             }
+            // hit testing
+            cubeModel.SetValue(FrameworkElement.TagProperty, entity);
 
             return cubeModel;
         }
@@ -63,7 +65,7 @@ namespace PredmetniZadatak2.Handlers
             myModel.Children.Add(model);
         }
 
-        public static void DrawLine(double x1, double y1, double x2, double y2, ModelVisual3D myModel)
+        public static void DrawLine(double x1, double y1, double x2, double y2, ModelVisual3D myModel, LineEntity lineEntity)
         {
             double temp1 = x1, temp2 = x2;
             x1 = y1;

@@ -73,10 +73,7 @@ namespace PredmetniZadatak2.Handlers
                         z = 0;
                         Points.Add(new PointStack(mapX, mapY, 0));
                     }
-                    GeometryModel3D model3D = ScreenHandler.Make3DCube(mapX, mapY, z, 0.05, EntityType.Substation);
-                   // Transformation.models.Add(model3D);
-
-                   // Entities.Add(Transformation.models.Count - 1, networkModel.Substations[i]);
+                    GeometryModel3D model3D = ScreenHandler.Make3DCube(mapX, mapY, z, 0.05, EntityType.Substation, networkModel.Substations[i]);
 
                     ScreenHandler.Draw3DCube(model3D, myModel);
                 }
@@ -120,10 +117,7 @@ namespace PredmetniZadatak2.Handlers
                         Points.Add(new PointStack(mapX, mapY, 0));
                     }
 
-                    GeometryModel3D model3D = ScreenHandler.Make3DCube(mapX, mapY, z, 0.05, EntityType.Node);
-                   // Transformation.models.Add(model3D);
-                   
-                  //  Entities.Add(Transformation.models.Count - 1, networkModel.Nodes[i]);
+                    GeometryModel3D model3D = ScreenHandler.Make3DCube(mapX, mapY, z, 0.05, EntityType.Node, networkModel.Nodes[i]);
 
                     ScreenHandler.Draw3DCube(model3D, myModel);
                 }
@@ -167,10 +161,7 @@ namespace PredmetniZadatak2.Handlers
                         Points.Add(new PointStack(mapX, mapY, 0));
                     }
 
-                    GeometryModel3D model3D = ScreenHandler.Make3DCube(mapX, mapY, z, 0.05, EntityType.Switch);
-                  //  Transformation.models.Add(model3D);
-
-                  //  Entities.Add(Transformation.models.Count - 1, networkModel.Switches[i]);
+                    GeometryModel3D model3D = ScreenHandler.Make3DCube(mapX, mapY, z, 0.05, EntityType.Switch, networkModel.Switches[i]);
 
                     ScreenHandler.Draw3DCube(model3D, myModel);
                 }
@@ -197,15 +188,44 @@ namespace PredmetniZadatak2.Handlers
 
                     CoordinatesHandler.FromCoordinatesToMapPosition(latitude2, longitude2, out mapX2, out mapY2);
 
-                  if (mapX1 != -1 && mapY1 != -1 && mapX2 != -1 && mapY2 != -1)
+                    if (mapX1 != -1 && mapY1 != -1 && mapX2 != -1 && mapY2 != -1)
                     {
                         cnt++;
-                        ScreenHandler.DrawLine(mapX1, mapY1, mapX2, mapY2, myModel);
+                        ScreenHandler.DrawLine(mapX1, mapY1, mapX2, mapY2, myModel, networkModel.Lines[i]);
+
+                        CountLine(networkModel.Lines[i].FirstEnd, networkModel);
+                        CountLine(networkModel.Lines[i].SecondEnd, networkModel);
                     }
                 }
             }
-
             return networkModel;
+        }
+        private static void CountLine(ulong key, NetworkModel model)
+        {
+            foreach (var item in model.Substations)
+            {
+                if (item.Id == key)
+                {
+                    item.counter++;
+                    return;
+                }
+            }
+            foreach (var item in model.Nodes)
+            {
+                if (item.Id == key)
+                {
+                    item.counter++;
+                    return;
+                }
+            }
+            foreach (var item in model.Switches)
+            {
+                if (item.Id == key)
+                {
+                    item.counter++;
+                    return;
+                }
+            }
         }
     }
 }

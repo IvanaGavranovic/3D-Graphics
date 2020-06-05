@@ -23,10 +23,5 @@ namespace PredmetniZadatak2.Classes
         {
             return String.Format($"Id: {Id}\nType: SwitchEntity\nName: {Name}\nStatus: {Status}");
         }
-
-        //public override void SetDefaultColor()
-        //{
-        //    Shape.Fill = Brushes.LightSkyBlue;
-        //}
     }
 }
