@@ -22,6 +22,7 @@ namespace PredmetniZadatak2
     public partial class MainWindow : Window
     {
         Transformation transformation;
+        HitTesting hitTestService;
 
         public MainWindow()
         {
@@ -31,6 +32,8 @@ namespace PredmetniZadatak2
             networkModel = MapHandler.LoadModelToMap(networkModel, MyModel);
 
             transformation = new Transformation(viewport, skaliranje, this, translate, rotateX, rotateY);
+
+            hitTestService = new HitTesting(viewport, model3DGroup, this);
         }
 
     }

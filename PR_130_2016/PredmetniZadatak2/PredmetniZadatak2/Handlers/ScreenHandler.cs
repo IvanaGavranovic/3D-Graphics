@@ -75,7 +75,7 @@ namespace PredmetniZadatak2.Handlers
 
             line.Positions = new Point3DCollection
             {
-               new Point3D(x1, y1, 0.01), new Point3D(x2, y2, 0.01), new Point3D(x2 - 0.02, y2 - 0.02, 0.01),  new Point3D(x1 - 0.02, y1 - 0.02, 0.01)
+               new Point3D(x1, y1, 0.02), new Point3D(x2, y2, 0.02), new Point3D(x2 - 0.02, y2 - 0.02, 0.02),  new Point3D(x1 - 0.02, y1 - 0.02, 0.02)
             };
 
             List<int> listTriangles = new List<int>() { 2, 1, 0, 3, 2, 0, 2,0,1, 3,0,2 };
